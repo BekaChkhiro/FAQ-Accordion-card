@@ -1,27 +1,34 @@
-const items = document.querySelectorAll('.accordion-items .accordion-item');
+const item = document.getElementsByClassName('accordion-item'); 
+const trigger = document.getElementsByClassName('accordion-header');
+const body = document.getElementsByClassName('accordion-description');
+const accImg = document.getElementsByClassName('arrow');
+const title = document.getElementsByClassName('header-title');
+let questions = [0,0,0,0,0];
 
-items.forEach(item => {
-    const trigger = item.querySelector('.accordion-header');
-    const body = item.querySelector('.accordion-description');
-    const accImg = item.querySelector('#arrow');
-    const title = item.querySelector('.header-title');
+for(let i = 0; i < item.length; i++ ) {
+    item[i].addEventListener('click', () => {
 
-    trigger.addEventListener('click', () => {
-        items.forEach(item => {
-            const trigger = item.querySelector('.accordion-header');
-            const body = item.querySelector('.accordion-description');
-            const accImg = item.querySelector('#arrow');
-            const title = item.querySelector('.header-title');
+        for(let i = 0; i < item.length; i++) {
+            trigger[i].classList.remove('open');
+            title[i].classList.remove('bold');
+            body[i].classList.remove('active');
+            accImg[i].classList.remove('acc-img');
+        }
 
-            item.querySelector('.accordion-header').classList.remove('open');
-            title.classList.remove('bold');
-            body.classList.remove('active');
-            accImg.classList.remove('acc-img');
-        })
-        item.querySelector('.accordion-header').classList.toggle('open');
-        title.classList.toggle('bold');
-        body.classList.toggle('active');
-        accImg.classList.toggle('acc-img');
-    });
-    
-});
+        if (questions[i] ==  1) {
+            trigger[i].classList.remove('open');
+            title[i].classList.remove('bold');
+            body[i].classList.remove('active');
+            accImg[i].classList.remove('acc-img');
+            questions[i] = 0;
+        } else {
+            trigger[i].classList.add('open');
+            title[i].classList.add('bold');
+            body[i].classList.add('active');
+            accImg[i].classList.add('acc-img');
+            questions[i] = 1;
+        }
+
+    })
+};
+
